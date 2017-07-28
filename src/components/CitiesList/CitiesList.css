@@ -1,0 +1,55 @@
+.CitiesList {
+  max-width: 1400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+}
+
+.CitiesList__item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 200px;
+  height: 100px;
+
+  font-size: 24px;
+  font-weight: bold;
+
+  border: 2px solid #fff;
+  border-radius: 16px;
+  background-color: #52bbed;
+  color: #fff;
+  transition: background-color 1s;
+
+  cursor: pointer;
+}
+
+.CitiesList__item:hover {
+  background-color: #000;
+}
+
+.CitiesList__remove {
+  position: absolute;
+  display: block;
+
+  width: 32px;
+  height: 32px;
+  top: 7px;
+  right: 7px;
+
+  background: url('./removeBtn.png');
+  border: none;
+  border-radius: 50%;
+  outline: 0;
+  cursor: pointer;
+
+  opacity: 0;
+  transition: opacity .75s .25s;
+}
+
+.CitiesList__item:hover .CitiesList__remove {
+  opacity: 1;
+}
