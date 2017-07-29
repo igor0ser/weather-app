@@ -2,20 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import removeCity from '../../actions/removeCity';
+import CityWitget from './CityWidget.jsx';
 import './CitiesList.css';
 
-const CitiesList = ({ cities, remove }) => (
+const CitiesList = ({ cities, removeCity }) => (
     <ul
         className="CitiesList"
     >
-        {cities.map(({ name, country, id }) =>
-          <li className="CitiesList__item" key={id}>
-            {name}, {country}
-            <button
-              className="CitiesList__remove"
-              onClick={() => remove(id)}
-            />
-          </li>
+        {cities.map(city =>
+          <CityWitget
+            city={city}
+            key={city.id}
+            removeCity={removeCity}
+          />
         )}
     </ul>
 );
@@ -26,10 +25,10 @@ CitiesList.propTypes = {
       country: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired
     })).isRequired,
-    remove: PropTypes.func.isRequired
+    removeCity: PropTypes.func.isRequired
 };
 
 export default connect(
   ({ cities }) => ({ cities }),
-  { remove: removeCity }
+  { removeCity }
 )(CitiesList);

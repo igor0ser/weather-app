@@ -48,11 +48,15 @@ class SearchCity extends PureComponent {
               className="SearchCity__input"
               type="text"
               placeholder="Kiev"
+              pattern=".{3,}"
+              title="3 characters minimum"
               required
               ref={input => this.input = input}
             />
           </label>
-          <input type="submit" className="btn" />
+          <button type="submit" className="btn">
+            Search
+          </button>
         </form>
         {city &&
           <SearchResult
