@@ -8,12 +8,12 @@ const CitiesList = ({ cities, remove }) => (
     <ul
         className="CitiesList"
     >
-        {cities.map(city =>
-          <li className="CitiesList__item">
-            {city}
+        {cities.map(({ name, country, id }) =>
+          <li className="CitiesList__item" key={id}>
+            {name}, {country}
             <button
               className="CitiesList__remove"
-              onClick={() => remove(city)}
+              onClick={() => remove(id)}
             />
           </li>
         )}
@@ -21,7 +21,11 @@ const CitiesList = ({ cities, remove }) => (
 );
 
 CitiesList.propTypes = {
-    cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+    cities: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired
+    })).isRequired,
     remove: PropTypes.func.isRequired
 };
 

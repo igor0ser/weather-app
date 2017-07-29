@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import AddCity from './components/AddCity/AddCity';
+import SearchCity from './components/SeacrhCity/SearchCity';
 import Header from './components/Header/Header';
 import CitiesList from './components/CitiesList/CitiesList';
 
@@ -12,7 +12,7 @@ class App extends Component {
   render = () => (
     <div className="App">
       <Header />
-      <AddCity />
+      <SearchCity />
       <CitiesList />
     </div>
   );

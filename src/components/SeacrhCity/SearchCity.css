@@ -1,0 +1,28 @@
+.SearchCity {
+  margin: 24px;
+}
+
+.SearchCity__input {
+  padding: 8px;
+  margin: 8px;
+  border-radius: 6px;
+  border-color: #458b74;
+  outline: none;
+}
+
+.SearchCity__question {
+  margin-bottom: 8px;
+}
+
+.SearchCity__error {
+  color: red;
+  margin-bottom: 8px;
+}
+
+.SearchCity__error {
+  color: red;
+}
+
+.btn {
+  margin-left: 6px;
+}
