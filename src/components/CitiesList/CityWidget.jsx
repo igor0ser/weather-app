@@ -1,12 +1,26 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import { urlById } from '../../utils/buildUrl';
 
 class CityWidget extends PureComponent{
+  state = {
+    weather: null
+  }
+
+  componentDidMount() {
+    axios.get(urlById(this.props.city.id))
+      .then(({ data }) =>{
+        console.log(data);
+      });
+  }
+
   render(){
     const { 
       city: { id, name, country },
       removeCity
     } = this.props;
+
 
     return (
       <li className="CitiesList__item" key={id}>
@@ -20,7 +34,7 @@ class CityWidget extends PureComponent{
   }
 }
 
-CitiesList.propTypes = {
+CityWidget.propTypes = {
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
       country: PropTypes.string.isRequired,
