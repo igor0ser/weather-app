@@ -43,7 +43,7 @@ class SearchCity extends PureComponent {
           <label>
             Add new city
             <input
-              className="SearchCity__input"
+              className="text-input"
               type="text"
               placeholder="Kiev"
               pattern=".{3,}"

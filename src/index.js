@@ -2,8 +2,8 @@ import React,{ Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import SearchCity from './components/SeacrhCity/SearchCity';
 import Header from './components/Header/Header';
+import SearchCity from './components/SeacrhCity/SearchCity';
 import CitiesList from './components/CitiesList/CitiesList';
 
 import './styles.css';

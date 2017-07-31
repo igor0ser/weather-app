@@ -28,3 +28,11 @@ body {
     color: #000;
     background-color: #e6e6fa;
 }
+
+.text-input {
+  padding: 8px;
+  margin: 8px;
+  border-radius: 6px;
+  border-color: #458b74;
+  outline: none;
+}
