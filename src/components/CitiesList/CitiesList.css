@@ -2,7 +2,7 @@
   max-width: 1400px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   list-style: none;
-  margin-bottom: 20px;
+  margin: 0 auto;
 }

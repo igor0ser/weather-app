@@ -20,10 +20,12 @@ class LocationDetect extends PureComponent {
   componentDidMount() {
     getLocation()
       .then(({ coords }) => axios.get(urlByCoords(coords)))
-      .then(({ data }) => {
-        const { name, id, sys: { country } } = data;
-        const city = { name, country, id };
-        this.setState({ city });
+      .then(({ data: { name, id, sys: { country } } }) => {
+        if (!this.props.cities.find(city => city.id === id)) {
+          this.setState({ 
+            city: { name, country, id }
+          });
+        }
       });
   }
 
@@ -46,7 +48,12 @@ class LocationDetect extends PureComponent {
 }
 
 LocationDetect.propTypes = {
-  addCity: PropTypes.func.isRequired
+  addCity: PropTypes.func.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired
+    })).isRequired,
 }
 
 export default LocationDetect;

@@ -5,8 +5,11 @@
   justify-content: space-around;
   align-items: center;
 
+  box-sizing: border-box;
   width: 200px;
   height: 200px;
+  margin: 10px;
+  padding-top: 15px;
 
   font-size: 18px;
 

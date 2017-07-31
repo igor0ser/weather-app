@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-
 class SearchResult extends PureComponent {
   onBtnClick = (isAgreed) => {
     const { city, addCity, resetForm } = this.props;

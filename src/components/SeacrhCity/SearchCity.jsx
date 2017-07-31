@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import addCity from '../../actions/addCity';
@@ -22,13 +23,10 @@ class SearchCity extends PureComponent {
     e.preventDefault();
 
     axios.get(urlByName(this.input.value))
-      //.then(({ data: { name, sys: { country, id } } }) => {
-      .then(({ data })=> {
-        console.log(data);
-        const { name, id, sys: { country } } = data;
-        const city = { name, country, id };
-        console.log(city);
-        this.setState({ city, error: null });
+      .then(({ data: { name, sys: { country, id } } })=> {
+        this.setState({ 
+          city: { name, country, id },
+          error: null });
       })
       .catch(() => {
         this.setState({ error: true });
@@ -37,7 +35,7 @@ class SearchCity extends PureComponent {
 
   render() {
     const { city, error } = this.state;
-    const { addCity } = this.props;
+    const { addCity, cities } = this.props;
 
     return (
       <div className="SearchCity">
@@ -68,10 +66,22 @@ class SearchCity extends PureComponent {
         {error &&
           <div className="SearchCity__error">Some error happened</div>
         }
-        <LocationDetect addCity={addCity} />
+        <LocationDetect addCity={addCity} cities={cities}/>
       </div>
     );
   }
 }
 
-export default connect(null, { addCity })(SearchCity);
+SearchCity.propTypes = {
+  addCity: PropTypes.func.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired
+    })).isRequired,
+}
+
+export default connect(
+  ({ cities }) => ({ cities }),
+  { addCity }
+)(SearchCity);
