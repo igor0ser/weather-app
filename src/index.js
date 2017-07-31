@@ -5,6 +5,7 @@ import store from './store';
 import Header from './components/Header/Header';
 import SearchCity from './components/SeacrhCity/SearchCity';
 import CitiesList from './components/CitiesList/CitiesList';
+import g from './utils/auth'; 
 
 import './styles.css';
 
@@ -22,3 +23,5 @@ ReactDOM.render(
   <Provider  store={store}><App /></Provider>,
   document.getElementById('root')
 );
+
+g();
