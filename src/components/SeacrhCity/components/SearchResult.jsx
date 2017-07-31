@@ -11,6 +11,10 @@ class SearchResult extends PureComponent {
     resetForm();
   }
 
+  componentDidMount() {
+    this.yesBtn.focus();
+  }
+
   render(){
     const { city: { name, country } } = this.props;
 
@@ -19,7 +23,11 @@ class SearchResult extends PureComponent {
         <span>
           Do you want to add <b>{name}, {country}</b> to your list
         </span>
-        <button onClick={() => this.onBtnClick(true)} className="btn">
+        <button
+          onClick={() => this.onBtnClick(true)}
+          ref={input => this.yesBtn = input}
+          className="btn"
+        >
           Yes
         </button>
         <button onClick={() => this.onBtnClick(false)} className="btn">

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import removeCity from '../../actions/removeCity';
-import CityWitget from './CityWidget.jsx';
+import CityWitget from './components/CityWidget.jsx';
 import './CitiesList.css';
 
 const CitiesList = ({ cities, removeCity }) => (

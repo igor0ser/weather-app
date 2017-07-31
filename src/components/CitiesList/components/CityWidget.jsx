@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { urlById } from '../../utils/buildUrl';
+import { urlById } from '../../../utils/buildUrl';
+import CityWeather from './CityWeather';
+import './CityWidget.css';
 
 class CityWidget extends PureComponent{
   state = {
@@ -10,8 +12,14 @@ class CityWidget extends PureComponent{
 
   componentDidMount() {
     axios.get(urlById(this.props.city.id))
-      .then(({ data }) =>{
-        console.log(data);
+      .then(({ data: { main } }) => {
+        const weather = {
+          tempMin: main.temp_min,
+          tempMax: main.temp_max,
+          humidity: main.humidity
+        };
+
+        this.setState({ weather });
       });
   }
 
@@ -21,12 +29,14 @@ class CityWidget extends PureComponent{
       removeCity
     } = this.props;
 
+    const { weather } = this.state;
 
     return (
-      <li className="CitiesList__item" key={id}>
-        {name}, {country}
+      <li className="CityWidget" key={id}>
+        <h3 className="CityWidget__name">{name}, {country}</h3>
+        {weather ? <CityWeather {...weather} /> : 'Loading'}
         <button
-          className="CitiesList__remove"
+          className="CityWidget__remove"
           onClick={() => removeCity(id)}
         />
       </li>

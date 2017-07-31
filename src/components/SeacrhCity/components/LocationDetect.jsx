@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-// import axios from 'axios';
+import getLocation from '../../../utils/getLocation';
+import { urlByCoords } from '../../../utils/buildUrl';
+import axios from 'axios';
 
 class LocationDetect extends PureComponent {
   state = {
@@ -15,9 +17,14 @@ class LocationDetect extends PureComponent {
     this.setState({ city: null })
   }
 
-  componentReceiveProps() {
-    const position = window.navigator.geolocation.getCurrentPosition(1);
-    console.log(position);
+  componentDidMount() {
+    getLocation()
+      .then(({ coords }) => axios.get(urlByCoords(coords)))
+      .then(({ data }) => {
+        const { name, id, sys: { country } } = data;
+        const city = { name, country, id };
+        this.setState({ city });
+      });
   }
 
   render() {
@@ -26,7 +33,7 @@ class LocationDetect extends PureComponent {
 
     return (
       <div className="SearchCity__question">
-        <span>Are you in the <b>{city}</b>?</span>
+        <span>Are you in the <b>{city.name}, {city.country}</b>?</span>
         <button onClick={() => this.onBtnClick(true)} className="btn">
           Yes
         </button>

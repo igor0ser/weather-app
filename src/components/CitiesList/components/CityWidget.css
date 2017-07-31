@@ -1,0 +1,55 @@
+.CityWidget {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 200px;
+  height: 200px;
+
+  font-size: 18px;
+
+  border-radius: 16px;
+  background-color: #52bbed;
+  color: #fff;
+  transition: background-color 1s;
+
+  cursor: pointer;
+}
+
+.CityWidget:hover {
+  background-color: #000;
+}
+
+.CityWidget__remove {
+  position: absolute;
+  display: block;
+
+  width: 32px;
+  height: 32px;
+  top: 7px;
+  right: 7px;
+
+  background: url('./removeBtn.png');
+  border: none;
+  border-radius: 50%;
+  outline: 0;
+  cursor: pointer;
+
+  opacity: 0;
+  transition: opacity .75s .25s;
+}
+
+.CityWidget:hover .CityWidget__remove {
+  opacity: 1;
+}
+
+.CityWidget__name {
+  width: 100%;
+  margin: 0;
+  border-bottom: 3px solid #fff;
+
+  font-size: 24px;
+  font-weight: bold;
+}
