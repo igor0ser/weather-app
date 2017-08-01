@@ -1,8 +1,9 @@
+/* eslint jsx-a11y/label-has-for: 0 */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import addCity from '../../actions/addCity';
+import dispatchAddCity from '../../actions/addCity';
 import SearchResult from './components/SearchResult';
 import LocationDetect from './components/LocationDetect';
 import { urlByName } from '../../utils/buildUrl';
@@ -14,17 +15,12 @@ class SearchCity extends PureComponent {
     error: null
   }
 
-  resetForm = () => {
-    this.input.value = '';
-    this.setState({ city: null });
-  }
-
   onSubmit = (e) => {
     e.preventDefault();
 
     axios.get(urlByName(this.input.value))
-      .then(({ data: { name, id, sys: { country } } })=> {
-        this.setState({ 
+      .then(({ data: { name, id, sys: { country } } }) => {
+        this.setState({
           city: { name, country, id },
           error: null
         });
@@ -32,6 +28,11 @@ class SearchCity extends PureComponent {
       .catch(() => {
         this.setState({ error: true });
       });
+  }
+
+  resetForm = () => {
+    this.input.value = '';
+    this.setState({ city: null });
   }
 
   render() {
@@ -50,7 +51,7 @@ class SearchCity extends PureComponent {
               pattern=".{3,}"
               title="3 characters minimum"
               required
-              ref={input => this.input = input}
+              ref={(input) => { this.input = input; }}
             />
           </label>
           <button type="submit" className="btn">
@@ -67,7 +68,7 @@ class SearchCity extends PureComponent {
         {error &&
           <div className="SearchCity__error">Some error happened</div>
         }
-        <LocationDetect addCity={addCity} cities={cities}/>
+        <LocationDetect addCity={addCity} cities={cities} />
       </div>
     );
   }
@@ -76,13 +77,13 @@ class SearchCity extends PureComponent {
 SearchCity.propTypes = {
   addCity: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      country: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired
-    })).isRequired,
-}
+    name: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired
+  })).isRequired,
+};
 
 export default connect(
   ({ cities }) => ({ cities }),
-  { addCity }
+  { addCity: dispatchAddCity }
 )(SearchCity);

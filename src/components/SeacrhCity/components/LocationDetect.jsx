@@ -1,20 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import getLocation from '../../../utils/getLocation';
 import { urlByCoords } from '../../../utils/buildUrl';
-import axios from 'axios';
 
 class LocationDetect extends PureComponent {
   state = {
     city: null
-  }
-
-  onBtnClick = (isAgreed) => {
-    const { addCity } = this.props;
-    if (isAgreed) {
-      addCity(this.state.city);
-    }
-    this.setState({ city: null })
   }
 
   componentDidMount() {
@@ -22,11 +14,19 @@ class LocationDetect extends PureComponent {
       .then(({ coords }) => axios.get(urlByCoords(coords)))
       .then(({ data: { name, id, sys: { country } } }) => {
         if (!this.props.cities.find(city => city.id === id)) {
-          this.setState({ 
+          this.setState({
             city: { name, country, id }
           });
         }
       });
+  }
+
+  onBtnClick = (isAgreed) => {
+    const { addCity } = this.props;
+    if (isAgreed) {
+      addCity(this.state.city);
+    }
+    this.setState({ city: null });
   }
 
   render() {
@@ -44,16 +44,16 @@ class LocationDetect extends PureComponent {
         </button>
       </div>
     );
-   }
+  }
 }
 
 LocationDetect.propTypes = {
   addCity: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      country: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired
-    })).isRequired,
-}
+    name: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired
+  })).isRequired,
+};
 
 export default LocationDetect;

@@ -1,6 +1,6 @@
 import { SIGN_IN } from './actionTypes';
 
-const signIn = (userId) => ({
+const signIn = userId => ({
   type: SIGN_IN,
   payload: userId
 });

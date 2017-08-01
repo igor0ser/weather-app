@@ -12,11 +12,10 @@ class Auth extends PureComponent {
   }
 
   componentDidMount() {
-    authInit()
-      .then(() => {
-        this.GoogleAuth = window.gapi.auth2.getAuthInstance();
-        this.setState({ readyToSignIn: true });
-      })
+    authInit().then(() => {
+      this.GoogleAuth = window.gapi.auth2.getAuthInstance();
+      this.setState({ readyToSignIn: true });
+    });
   }
 
   onSignInClick = () => {
@@ -28,11 +27,11 @@ class Auth extends PureComponent {
 
   onSignOutClick = () => {
     this.GoogleAuth.signOut().then(() => {
-      console.log(arguments);
-      console.log('was sign outed');
       this.props.signOut();
     });
   }
+
+  GoogleAuth = null
 
   render() {
     const { readyToSignIn } = this.state;
@@ -43,12 +42,12 @@ class Auth extends PureComponent {
     const btnText = isAuthorized ? 'Sign out' : 'Sign in';
 
     return readyToSignIn ? (
-        <button
-          className="btn"
-          onClick={onBtnClick}
-        >
-          {btnText}
-        </button>
+      <button
+        className="btn"
+        onClick={onBtnClick}
+      >
+        {btnText}
+      </button>
     ) : (
       <span>Loading...</span>
     );

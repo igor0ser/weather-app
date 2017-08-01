@@ -5,7 +5,7 @@ import { urlById } from '../../../utils/buildUrl';
 import CityWeather from './CityWeather';
 import './CityWidget.css';
 
-class CityWidget extends PureComponent{
+class CityWidget extends PureComponent {
   state = {
     weather: null
   }
@@ -23,8 +23,8 @@ class CityWidget extends PureComponent{
       });
   }
 
-  render(){
-    const { 
+  render() {
+    const {
       city: { id, name, country },
       removeCity
     } = this.props;
@@ -40,17 +40,17 @@ class CityWidget extends PureComponent{
           onClick={() => removeCity(id)}
         />
       </li>
-    )
+    );
   }
 }
 
 CityWidget.propTypes = {
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      country: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired
-    }).isRequired,
-    removeCity: PropTypes.func.isRequired
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired
+  }).isRequired,
+  removeCity: PropTypes.func.isRequired
 };
 
 export default CityWidget;

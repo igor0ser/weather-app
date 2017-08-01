@@ -6,5 +6,5 @@ export const urlByName = name => `${baseUrl}&q=${name}`;
 
 export const urlById = id => `${baseUrl}&id=${id}`;
 
-export const urlByCoords = ({ latitude, longitude}) =>
+export const urlByCoords = ({ latitude, longitude }) =>
   `${baseUrl}&lat=${latitude}&lon=${longitude}`;

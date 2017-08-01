@@ -2,6 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 class SearchResult extends PureComponent {
+  componentDidMount() {
+    this.yesBtn.focus();
+  }
+
   onBtnClick = (isAgreed) => {
     const { city, addCity, resetForm } = this.props;
     if (isAgreed) {
@@ -10,11 +14,7 @@ class SearchResult extends PureComponent {
     resetForm();
   }
 
-  componentDidMount() {
-    this.yesBtn.focus();
-  }
-
-  render(){
+  render() {
     const { city: { name, country } } = this.props;
 
     return (
@@ -24,7 +24,7 @@ class SearchResult extends PureComponent {
         </span>
         <button
           onClick={() => this.onBtnClick(true)}
-          ref={input => this.yesBtn = input}
+          ref={(input) => { this.yesBtn = input; }}
           className="btn"
         >
           Yes

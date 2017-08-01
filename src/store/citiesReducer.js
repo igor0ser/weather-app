@@ -4,10 +4,9 @@ import { load } from '../utils/localStorage';
 const citiesReducer = (state = [], action) => {
   switch (action.type) {
     case SIGN_IN:
-      return load('cities', action.payload) || []
+      return load('cities', action.payload) || [];
     case ADD_CITY:
-      console.log(action.payload);
-      if (state.find(({ id }) => id === action.payload.id)){
+      if (state.find(({ id }) => id === action.payload.id)) {
         return state;
       }
       return [action.payload, ...state];
