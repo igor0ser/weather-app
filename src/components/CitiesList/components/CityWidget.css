@@ -17,8 +17,6 @@
   background-color: #52bbed;
   color: #fff;
   transition: background-color 1s;
-
-  cursor: pointer;
 }
 
 .CityWidget:hover {

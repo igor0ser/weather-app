@@ -1,9 +1,10 @@
 import { combineReducers, applyMiddleware, createStore } from 'redux';
-import cities from './citiesReducer';
 import { localStorageMiddlware } from '../utils/localStorage';
+import cities from './citiesReducer';
+import auth from './authReducer';
 
 const store = createStore(
-  combineReducers({ cities }),
+  combineReducers({ cities, auth }),
   applyMiddleware(localStorageMiddlware)
 );
 

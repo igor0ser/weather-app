@@ -1,12 +1,12 @@
-import { ADD_CITY, REMOVE_CITY } from '../actions/actionTypes';
+import { ADD_CITY, REMOVE_CITY, SIGN_IN } from '../actions/actionTypes';
 import { load } from '../utils/localStorage';
 
-const cities = [{ name: 'London', country: 'GB', id: 2643743 }];
-const preloadedState = load('cities') || cities;
-
-const citiesReducer = (state = preloadedState, action) => {
+const citiesReducer = (state = [], action) => {
   switch (action.type) {
+    case SIGN_IN:
+      return load('cities', action.payload) || []
     case ADD_CITY:
+      console.log(action.payload);
       if (state.find(({ id }) => id === action.payload.id)){
         return state;
       }
@@ -19,4 +19,3 @@ const citiesReducer = (state = preloadedState, action) => {
 };
 
 export default citiesReducer;
-

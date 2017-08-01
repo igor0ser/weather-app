@@ -23,10 +23,11 @@ class SearchCity extends PureComponent {
     e.preventDefault();
 
     axios.get(urlByName(this.input.value))
-      .then(({ data: { name, sys: { country, id } } })=> {
+      .then(({ data: { name, id, sys: { country } } })=> {
         this.setState({ 
           city: { name, country, id },
-          error: null });
+          error: null
+        });
       })
       .catch(() => {
         this.setState({ error: true });
